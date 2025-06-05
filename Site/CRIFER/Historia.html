@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CRIFER - Soluções em estruturas metálicas">
+    <meta name="author" content="CRIFER">
+    <title>CRIFER - Projetos Estruturais</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        /* HEADER STYLES */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(128, 0, 0, 0.95);
+            padding: 17px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            
+        }
+        
+        header.scrolled {
+            padding: 10px 5%;
+            background-color: rgba(128, 0, 0, 1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            transition: height 0.3s ease;
+        }
+        
+        header.scrolled .logo img {
+            height: 40px;
+        }
+        
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin: 0 95px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcccc;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcccc;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+         .orcamento {
+            background-color: #a83232;
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 6px 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .orcamento:hover {
+            background-color: #cc3939;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* RESPONSIVE HEADER */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Adicionando estilos para as animações de hambúrguer */
+        .menu-toggle span.rotate45 {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .menu-toggle span.opacity0 {
+            opacity: 0;
+        }
+        
+        .menu-toggle span.rotate-45 {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                margin-right: 15px;
+            }
+            
+            nav {
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(128, 0, 0, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: all 0.4s ease-out;
+            }
+            
+            nav.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .orcamento {
+                margin-top: 10px;
+            }
+        }
+        
+        /* MAIN CONTENT STYLES */
+        .hero {
+            display: none; /* Esconde a seção hero */
+        }
+        
+        /* SECTION STYLES */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        #sobre {
+            padding-top: 120px; /* Ajustado para compensar o header fixo */
+        }
+        
+        .section:nth-child(odd) {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .section:nth-child(even) {
+            background-color: rgba(30, 30, 30, 0.8);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section-title {
+            position: relative;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #800000;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .historia-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .historia-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .historia-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .historia-image {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .historia-image img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .historia-image img:hover {
+            transform: translateY(-10px);
+        }
+        
+        .quote-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 2rem;
+            border-left: 4px solid #800000;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .quote-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        /* FOOTER STYLES */
+        footer {
+            background-color: #800000;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .footer-logo img {
+            width: 230px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        .icones-redes {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .icones-redes a {
+            color: #fefcfc;
+            font-size: 24px;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .icones-redes a:hover {
+            color: #ff0101;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .central {
+            text-align: center;
+            margin: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            footer {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-logo, .icones-redes, .contact-info, .central {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* ANIMAÇÕES DE HOVER */
+        .about-content img:hover,
+        .historia-image img:hover {
+            transform: translateY(-10px);
+        }
+        
+        .about-content img {
+            transition: transform 0.3s ease;
+        }
+        .animate-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .animate-fade-right {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-fade-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .animate-fade-left {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-fade-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+
+ 
+        
+
+        /* TABLET STYLES */
+        @media (max-width: 1024px) {
+            nav ul li {
+                margin: 0 20px;
+            }
+            
+            nav ul li a {
+                font-size: 13px;
+            }
+            
+            .orcamento {
+                padding: 8px 16px;
+                font-size: 11px;
+            }
+            
+            .container {
+                width: 95%;
+                padding: 0 15px;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+        
+        /* MOBILE STYLES */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 15px;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            header.scrolled .logo img {
+                height: 30px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: linear-gradient(135deg, rgba(128, 0, 0, 0.98) 0%, rgba(168, 50, 50, 0.95) 100%);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+                backdrop-filter: blur(10px);
+                transform: translateX(-100%);
+                transition: transform 0.4s ease;
+            }
+            
+            nav.active {
+                transform: translateX(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li {
+                margin: 20px 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+                padding: 15px 0;
+                display: block;
+                width: 100%;
+            }
+            
+            .orcamento {
+                margin-top: 30px;
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+            
+            .section {
+                padding: 2rem 0;
+            }
+            
+            #sobre {
+                padding-top: 80px;
+            }
+            
+            .section-title {
+                margin-bottom: 2rem;
+            }
+            
+            .about-content {
+                gap: 1.5rem;
+            }
+            
+            .about-text {
+                text-align: center;
+            }
+            
+            .historia-text {
+                text-align: left;
+            }
+            
+            .quote-box {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+                border-radius: 0 10px 10px 0;
+            }
+            
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 15px;
+            }
+            
+            .footer-logo img {
+                width: 150px;
+                margin-bottom: 20px;
+            }
+            
+            .icones-redes {
+                margin: 20px 0;
+            }
+            
+            .icones-redes a {
+                font-size: 24px;
+                margin: 0 10px;
+            }
+        }
+
+        /* SMALL MOBILE STYLES */
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 10px;
+            }
+            
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            .section {
+                padding: 1.5rem 0;
+            }
+            
+            .section-title {
+                margin-bottom: 1.5rem;
+            }
+            
+            .about-content {
+                gap: 1rem;
+            }
+            
+            .quote-box {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .historia-content {
+                gap: 1.5rem;
+            }
+            
+            .historia-image {
+                margin: 1.5rem 0;
+            }
+            
+            footer {
+                padding: 20px 10px;
+            }
+
+            }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="/CRIFER/Home.html"</a>
+            <img src="/logo.superior.png" alt="Logo CRIFER"><img src="/frame2.png" alt="Logo CRIFER">
+            </a>
+        </div>
+        
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+      <li><a href="/CRIFER/Home.html#Produtos">Produtos</a></li>
+                <li><a href="/CRIFER/Historia.html">Sobre nós</a></li>
+                <li><a href="/CRIFER/Historia.html#historia">História</a></li>
+               
+            </ul>
+        </nav>
+        <a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento" class="orcamento">Fazer Orçamento</a>
+    </header>
+    <section class="section" id="sobre">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">Sobre Nós</h2>
+            <div class="about-content">
+                <div class="about-text animate-fade-in">
+                    <p>A Crifer é uma empresa especializada em fornecer soluções de ferragem armada, vergalhões, arames, treliças e outros materiais para estruturas de concreto armado. Estabelecendo parcerias com clientes e fornecedores, contribuindo para o desenvolvimento sustentável da construção civil.</p>
+                </div>
+                <img src="/imagemhistoria.jpg" alt="Equipe CRISFER" width="600" height="400" class="animate-scale" style="transition: transform 0.3s ease;">
+            </div>
+        </div>
+    </section>
+    
+    <section class="section" id="historia">
+        <div class="container">
+            <h2 class="section-title animate-fade-in">A História do Aço</h2>
+            <div class="historia-content">
+                <div class="historia-text animate-fade-right">
+                    <p>O aço é mais do que um material; é uma obra-prima da natureza e da ciência, uma combinação perfeita de ferro, carbono e outros elementos que geram mais de três mil tipos de aço, cada um com sua própria essência. Sua versatilidade é impressionante: desde armaduras de concreto até estruturas metálicas que sustentam sonhos, ele está em toda parte, moldando o mundo com sua resistência e beleza.</p>
+                </div>
+                
+                <div class="historia-image animate-fade-in">
+                    <img src="/Captura-de-Tela-2023-10-24-as-16.21.57.jpg" alt="Estrutura de aço" width="800" height="500">
+                </div>
+                
+                <div class="quote-box animate-scale">
+                    <p class="quote-text">"O aço não é apenas um material de construção; é um símbolo de progresso e resiliência. Ele carrega consigo a promessa de um futuro mais moderno, eficiente e sustentável."</p>
+                </div>
+                
+                <div class="historia-text animate-fade-left">
+                    <p>Cada viga, cada estrutura, cada ponte construída com aço é um reflexo da paixão humana por superar limites e criar o impossível. Por tudo isso, o aço não apenas sustenta edifícios, mas também sustenta sonhos. E é essa capacidade de transformar ideias em realidade que faz do aço uma paixão que molda não apenas o presente, mas também o futuro. Ele é, e sempre será, a força que constrói o mundo.</p>
+                </div>
+                
+                <div class="historia-image animate-fade-in">
+                    <img src="/aco-para-construcao-civil.jpg" alt="Aplicações do aço na construção" width="800" height="400">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+ <script>
+        // Menu toggle functionality
+        function toggleMenu() {
+            const nav = document.getElementById('nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                const nav = document.getElementById('nav');
+                const menuToggle = document.querySelector('.menu-toggle');
+                
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-fade-in, .animate-fade-right, .animate-fade-left, .animate-scale').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const nav = document.getElementById('nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const header = document.querySelector('header');
+            
+            if (!header.contains(e.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+    <script>
+        // Script para controlar o menu toggle em dispositivos móveis
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    // Animar as barras do hambúrguer para formar um X
+                    const spans = menuToggle.querySelectorAll('span');
+                    spans[0].classList.toggle('rotate45');
+                    spans[1].classList.toggle('opacity0');
+                    spans[2].classList.toggle('rotate-45');
+                });
+            }
+            
+            // Efeito de scroll no header
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Função para animar elementos ao rolar
+            function checkScroll() {
+                const elements = document.querySelectorAll('.animate-fade-in, .animate-fade-right, .animate-fade-left, .animate-scale');
+                
+                elements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150; // Quando o elemento se torna visível
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('visible');
+                    } else {
+                        element.classList.remove('visible');
+                    }
+                });
+            }
+            
+            // Verificar posição dos elementos na carga inicial da página
+            checkScroll();
+            
+            // Verificar posição dos elementos ao rolar
+            window.addEventListener('scroll', checkScroll);
+        });
+    </script>
+ <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-pap58R7D2HykYjBzKpG1mg5yXUc4tG+NLzRuJ0R9s+LbZ7gOZ5XLm3xzwYOuDASxyvbfXc2jPZTcFQZ7z98+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Adicionar AOS (Animate On Scroll) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    
+    <style>
+        /* GLOBAL STYLES */
+        body {
+           padding-top: 3rem;
+            padding-bottom: 3rem;
+            color: rgb(255, 255, 255);
+            background-color: rgb(0, 0, 0); /* Fundo alterado para preto */
+            height: 0vh; /* Define a altura como 60% da altura da viewport */
+        }
+        /* CUSTOMIZE THE CAROUSEL */
+        .carousel {
+            margin-bottom: 4rem;
+        }
+        
+        .carousel-caption {
+            bottom: 3rem;
+            z-index: 10;
+        }
+        
+        .carousel-item {
+            height: 45rem;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Adicionando uma animação suave para imagens do carrossel */
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-item.active img {
+            transform: scale(1.02);
+        }
+        
+        /* Featurettes */
+        .featurette-divider {
+            margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+        }
+        
+        /* Mudando cor do texto para vermelho */
+        .text-muted {
+            color: #ba0101 !important; /* Vermelho brilhante para textos que eram cinza */
+        }
+        
+        h2.featurette-heading {
+            color: #ffffff; /* Vermelho para títulos */
+        }
+        
+        .lead {
+            color: #ffffff; /* Vermelho para textos lead */
+        }
+        
+        /* Adicionando animação para efeito de hover nas imagens */
+        .featurette img:hover {
+            transform: scale(1.05);
+            transition: transform 0.5s ease;       
+        }
+        
+        
+                    
+/* Estilos melhorados para o rodapé */
+footer {
+    background-color: #800000;
+    color: #fff;
+    padding: 20px 0 20px;
+    width: 100%;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    gap: 40px;
+}
+
+/* Estilo melhorado para o logo e descrição */
+.footer-logo {
+    flex: 1;
+    max-width: 250px;
+}
+
+.footer-logo img {
+    width: 210px;
+    height: 100px;
+    max-height: 100px;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.footer-logo p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #f1f1f1;
+    font-size: 0.95rem;
+}
+
+/* Ícones sociais melhorados */
+.social-container {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    margin-top: 15px;
+    right: -30;
+}
+
+.social-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin-left: 35 -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #800000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background-color: #f8f8f8;
+}
+
+.social-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Colunas principais do rodapé */
+.footer-links, 
+.contact-info, 
+.central {
+    flex: 1;
+    padding: 0 15px;
+}
+
+/* Títulos das seções */
+.footer-links h3{
+padding-left: 122px;
+font-weight: bold;
+font-size: 1.2rem;
+margin-bottom: 30px;
+position: relative;
+}
+
+
+.contact-info h3, 
+.central h3 {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+     
+}
+
+.footer-links h3::after,
+.contact-info h3::after,
+.central h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 0px;
+    background-color: #000000;
+}
+
+/* Lista de links melhorada */
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+    padding-left: 140px;
+}
+
+/* Links uniformizados */
+.footer-links ul li a,
+.footer-links ul li a:link,
+.footer-links ul li a:visited,
+.footer-links ul li a:active,
+.contact-info a,
+.central a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    
+}
+
+.footer-links ul li a:hover,
+.contact-info a:hover,
+.central a:hover {
+    color: #f1f1f1 !important;
+    text-decoration: none !important;
+    padding-left: 5px;
+}
+
+/* Informações de contato */
+.contact-info p,
+.central p {
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Rodapé inferior */
+.footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #f1f1f1;
+    font-size: 0.9rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile Large (481px - 768px) */
+@media (max-width: 768px) {
+    body {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    
+    .carousel {
+        margin-bottom: 2rem;
+    }
+    
+    .carousel-item {
+        height: 25rem;
+    }
+    
+    .carousel-caption {
+        bottom: 1rem;
+        padding: 0 10px;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 1.5rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 0.9rem;
+    }
+    
+    .featurette-divider {
+        margin: 2rem 0;
+    }
+    
+    /* Footer mobile */
+    footer {
+        padding: 30px 0 15px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+    }
+    
+    .footer-logo,
+    .footer-links,
+    .contact-info,
+    .central {
+        flex: none;
+        width: 100%;
+        max-width: none;
+        min-width: auto;
+        padding: 0;
+        margin-bottom: 25px;
+    }
+    
+    .footer-logo {
+        order: 1;
+    }
+    
+    .footer-links {
+        order: 2;
+    }
+    
+    .contact-info {
+        order: 3;
+    }
+    
+    .central {
+        order: 4;
+    }
+    
+    .footer-logo img {
+        width: 160px;
+        height: 75px;
+        margin: 0 auto 15px;
+        display: block;
+    }
+    
+    .social-container {
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .footer-links h3,
+    .contact-info h3,
+    .central h3 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    .footer-links h3::after,
+    .contact-info h3::after,
+    .central h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .footer-links ul {
+        text-align: center;
+    }
+    
+    .contact-info,
+    .central {
+        text-align: center;
+    }
+}
+
+/* Mobile Small (320px - 480px) */
+@media (max-width: 480px) {
+    body {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .carousel-item {
+        height: 20rem;
+    }
+    
+    .carousel-caption {
+        padding: 0 5px;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 1.2rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 0.8rem;
+    }
+    
+    .featurette-divider {
+        margin: 1.5rem 0;
+    }
+    
+    /* Footer small mobile */
+    footer {
+        padding: 20px 0 10px;
+    }
+    
+    .footer-content {
+        gap: 20px;
+    }
+    
+    .footer-logo,
+    .footer-links,
+    .contact-info,
+    .central {
+        margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+        width: 140px;
+        height: 65px;
+    }
+    
+    .social-container {
+        gap: 8px;
+    }
+    
+    .social-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .social-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .footer-bottom {
+        padding: 15px 0;
+        margin-top: 15px;
+    }
+}
+
+/* Extra Small Mobile (até 320px) */
+@media (max-width: 320px) {
+    .carousel-item {
+        height: 18rem;
+    }
+    
+    .footer-logo img {
+        width: 120px;
+        height: 55px;
+    }
+    
+    .social-container {
+        gap: 6px;
+    }
+    
+    .social-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .social-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .footer-content {
+        gap: 15px;
+    }
+}
+
+/* Orientação paisagem em dispositivos móveis */
+@media (max-width: 768px) and (orientation: landscape) {
+    .carousel-item {
+        height: 15rem;
+    }
+    
+    .carousel-caption {
+        bottom: 0.5rem;
+    }
+    
+    .carousel-caption h1 {
+        font-size: 1.2rem;
+    }
+    
+    .carousel-caption p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-item img,
+    .featurette img,
+    .social-icon,
+    .footer-links ul li a {
+        transition: none;
+    }
+    
+    .carousel-item.active img {
+        transform: none;
+    }
+    
+    .featurette img:hover {
+        transform: none;
+    }
+}
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+    .carousel-item {
+        height: 35rem;
+    }
+    
+    .carousel-caption {
+        bottom: 2rem;
+    }
+    
+    .featurette-divider {
+        margin: 3rem 0;
+    }
+    
+    .footer-content {
+        gap: 30px;
+    }
+    
+    .footer-links, 
+    .contact-info, 
+    .central {
+        min-width: 180px;
+    }
+    
+    .footer-logo img {
+        width: 180px;
+        height: 85px;
+    }
+    
+    .social-icon {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .social-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Carousel -->
+    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/carrosel1.jpg" alt="CRIFER" class="animated-image">
+                <div class="container">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/carrosel2.jpg" alt="CRIFER" class="animated-image">
+                <div class="container">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/carrosel3.jpg" alt="CRIFER" class="animated-image">
+                <div class="container">
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Featurettes -->
+    <div class="container marketing">
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7" data-aos="fade-right" data-aos-duration="1000">
+                <h2 class="featurette-heading">Seja bem-vindo ao nosso portfólio! Crifer. <span class="text-muted">  Aqui, você encontrará uma seleção dos nossos trabalhos e projetos mais recentes.</span></h2>
+                <p class="lead"> Muitos refletem a nossa dedicação. Ao longo dessa trajetória, buscamos sempre entregar resultados de alta qualidade, para atender às necessidades de cada cliente com excelência e satisfação.</p>
+            </div>
+            <div class="col-md-5" data-aos="fade-left" data-aos-duration="1000">
+                <div class="bg-secondary-subtle d-flex justify-content-center align-items-center" style="width: 100%; height: 500px;">
+                    <img src="/imagem1.jpg" alt="Logo CRIFER" style="max-width: 100%; max-height: 100%; object-fit: contain;" class="animated-image">
+                </div>
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2" data-aos="fade-left" data-aos-duration="1000">
+                <h2 class="featurette-heading">Cada projeto foi cuidadosamente desenvolvido. <span class="text-muted">  Para garantir excelência.</span></h2>
+                <p class="lead"> Sempre com grande atenção aos detalhes e, acima de tudo, a satisfação dos nossos clientes.</p>
+            </div>
+            <div class="col-md-5 order-md-1" data-aos="fade-right" data-aos-duration="1000">
+                <div class="bg-secondary-subtle d-flex justify-content-center align-items-center" style="width: 100%; height: 500px;">
+                    <img src="/imagem2.jpg" alt="Imagem de estrutura metálica" style="max-width: 100%; max-height: 100%; object-fit: contain;" class="animated-image">
+                </div>
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7" data-aos="fade-right" data-aos-duration="1000">
+                <h2 class="featurette-heading">A Crifer preza pela qualidade.<span class="text-muted">  Em cada etapa.</span></h2>
+                <p class="lead">Desde do orçamento até a entrega final do produto, sempre com o compromisso e qualidade.</p>
+            </div>
+            <div class="col-md-5" data-aos="fade-left" data-aos-duration="1000">
+                <div class="bg-secondary-subtle d-flex justify-content-center align-items-center" style="width: 100%; height: 500px;">
+                    <img src="/imagem3.jpg" alt="Imagem de projeto concluído" style="max-width: 100%; max-height: 100%; object-fit: cover;" class="animated-image">
+                </div>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+    </div>
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <!-- Logo e Descrição -->
+            <div class="footer-logo">
+                <a href="/CRIFER/Home.html">
+                    <img src="/logo.inferior.png" alt="Logo CRIFER">
+                
+                
+                <!-- Ícones Sociais -->
+                <div class="social-container">
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento" 
+                       class="social-icon" 
+                       title="WhatsApp" 
+                       target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- Email -->
+                    <a href="mailto:vendas.crifer@gmail.com" 
+                       class="social-icon" 
+                       title="Email" 
+                       target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Links Rápidos -->
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="/CRIFER/Home.html">Página Inicial</a></li>
+                    <li><a href="/CRIFER/Home.html#Produtos">Produtos</a></li>
+                    <li><a href="/CRIFER/Historia.html">Sobre Nós</a></li>
+                   
+                </ul>
+            </div>
+            
+            <!-- Informações de Contato -->
+            <div class="contact-info">
+                <h3>Contato</h3>
+                <p>
+                    <a href="https://wa.me/5516996450237" 
+                       target="_blank" 
+                       title="WhatsApp">
+                         (16) 9.9645-0237
+                    </a>
+                </p>
+                <p>
+                    <a href="https://wa.me/5516993678475" 
+                       target="_blank" 
+                       title="WhatsApp">
+                         (16) 9.9367-8475
+                    </a>
+                </p>
+                <p>
+                    <a href="mailto:vendas.crifer@gmail.com" 
+                       title="Enviar Email">
+                         vendas.crifer@gmail.com
+                    </a>
+                </p>
+            </div>
+            
+            <!-- Central de Vendas -->
+            <div class="central">
+                <h3>Central de Vendas</h3>
+                <p>
+                    <a href="https://maps.google.com/?q=Av.+Ettore+e+Aurora+Coraucci,+610,+Jardim+Alexandre+Balbo,+Ribeirão+Preto+-+SP" 
+                       target="_blank" 
+                       title="Ver no Google Maps">
+                         Av. Ettore e Aurora Coraucci, 610
+                    </a>
+                </p>
+                <p>
+                    <a href="https://maps.google.com/?q=Jardim+Alexandre+Balbo,+Ribeirão+Preto+-+SP" 
+                       target="_blank" 
+                       title="Ver no Google Maps">
+                        Jardim Alexandre Balbo
+                    </a>
+                </p>
+                <p>
+                    <a href="https://maps.google.com/?q=Ribeirão+Preto+-+SP" 
+                       target="_blank" 
+                       title="Ver no Google Maps">
+                        Ribeirão Preto - SP
+                    </a>
+                </p>
+                <p><strong>CEP:</strong> 14096-160</p>
+            </div>
+        </div>
+        
+        <!-- Rodapé Inferior -->
+        <div class="footer-bottom">
+            <p>
+                © 2024 CRIFER ARAMES E FERRAGEM ARMADAS<br>
+                <strong>CNPJ:</strong> 52.959.907/0001-86<br>
+                
+            </p>
+        </div>
+    </div>
+</footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Script para animações ao rolar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Inicializar AOS para animações ao rolar
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init();
+            
+            // Adicionar classe para animar textos
+            const textElements = document.querySelectorAll('.featurette-heading, .lead');
+            textElements.forEach(function(element) {
+                element.classList.add('animate-text');
+            });
+            
+            // Adicionar animação ao carousel
+            const carousel = document.getElementById('myCarousel');
+            carousel.addEventListener('slide.bs.carousel', function() {
+                const activeItem = this.querySelector('.carousel-item.active img');
+                activeItem.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    activeItem.style.transform = 'scale(1)';
+                }, 500);
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript para funcionalidades interativas -->
+    <script>
+        // Script para efeito de rolagem no cabeçalho
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Script para menu responsivo
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+        });
+    </script>
+<script>
+  const video = document.querySelector('.video-banner');
+  video.playbackRate = 1.0; // velocidade: 1.0x (mais lento). Use 2.0 para 2x mais rápido.
+</script>
+</footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Script para animações ao rolar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Inicializar AOS para animações ao rolar
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init();
+            
+            // Adicionar classe para animar textos
+            const textElements = document.querySelectorAll('.featurette-heading, .lead');
+            textElements.forEach(function(element) {
+                element.classList.add('animate-text');
+            });
+            
+            // Adicionar animação ao carousel
+            const carousel = document.getElementById('myCarousel');
+            carousel.addEventListener('slide.bs.carousel', function() {
+                const activeItem = this.querySelector('.carousel-item.active img');
+                activeItem.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    activeItem.style.transform = 'scale(1)';
+                }, 500);
+            });
+        });
+    </script>
+
+<script src="/rodape.html"></script>
+ <!-- BOTÃO WHATSAPP - COPIE ESTE CÓDIGO -->
+    <a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento" 
+       target="_blank" 
+       style="position: fixed !important;
+              bottom: 20px !important;
+              right: 20px !important;
+              width: 60px !important;
+              height: 60px !important;
+              background-color: #25D366 !important;
+              border-radius: 100% !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+              z-index: 999999 !important;
+              text-decoration: none !important;
+              transition: all 0.3s ease !important;"
+       onmouseover="this.style.backgroundColor='#20BA5A'; this.style.transform='scale(1.1)'"
+       onmouseout="this.style.backgroundColor='#25D366'; this.style.transform='scale(1)'">
+      <!-- Produtos em Destaque -->
+       <div
+        <section class="produtos-grid">
+<DIV  ID="Produtos">        
+             
+</DIV>  
+        <!-- Ícone WhatsApp -->
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.386"/>
+        </svg>
+    </a>
+</body>
+</html>
+
+
+

@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRIFER - Arames e Ferragem Armada</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(6, 6, 6);
+            color: white;
+            background-image: url('/img2025fundo.jpg'); 
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER STYLES */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(128, 0, 0, 0.95);
+            padding: 15px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            
+        }
+        
+        header.scrolled {
+            padding: 10px 5%;
+            background-color: rgba(128, 0, 0, 1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            transition: height 0.3s ease;
+        }
+        
+        header.scrolled .logo img {
+            height: 40px;
+        }
+        
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin: 0 95px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcccc;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcccc;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .orcamento {
+            background-color: #a83232;
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 7px 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .orcamento:hover {
+            background-color: #cc3939;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Menu Hamburguer para responsividade */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding-top: 80px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            background-color: #800000;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            color: white;
+            font-size: 16px;
+            min-width: 180px;
+        }
+
+        .buttons button a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .buttons button:hover {
+            background-color: #fcfcfcf9;
+            transform: scale(1.05);
+            color: #df1f1f;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .buttons button:hover a {
+            color: #df1f1f;
+        }
+
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0 20px;
+            background: url("/imagemfundohome.jpg") center/cover fixed no-repeat;
+        }
+
+        /* FOOTER STYLES */
+        footer {
+            width: 100%;
+            background-color: #8B0000; /* Vermelho escuro */
+            color: white;
+            margin-top: auto;
+            
+        }
+
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+
+
+
+
+
+        /* ========== MEDIA QUERIES ========== */
+        
+        /* Tablets Grandes e Desktops Pequenos */
+        @media (max-width: 1200px) {
+            header {
+                padding: 15px 3%;
+            }
+            
+            nav ul li {
+                margin: 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 45px;
+            }
+            
+            .hero h2 {
+                font-size: 28px;
+            }
+        }
+
+        /* Tablets */
+        @media (max-width: 992px) {
+            nav ul li {
+                margin: 0 30px;
+            }
+            
+            nav ul li a {
+                font-size: 14px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero h2 {
+                font-size: 25px;
+            }
+            
+            .buttons button {
+                min-width: 160px;
+                font-size: 15px;
+            }
+        }
+
+        /* Tablets Pequenos */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 3%;
+                flex-wrap: wrap;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                order: 3;
+            }
+
+            .logo {
+                order: 1;
+            }
+            
+            .orcamento {
+                order: 2;
+                margin-right: 15px;
+                padding: 6px 15px;
+                font-size: 12px;
+            }
+
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: rgba(128, 0, 0, 0.98);
+                width: 100%;
+                display: none;
+                padding: 20px 0;
+                order: 4;
+                flex-basis: 100%;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+                padding: 10px;
+                display: block;
+            }
+
+            .hero {
+                height: 90vh;
+                padding-top: 100px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero h2 {
+                font-size: 20px;
+            }
+            
+            .hero h1 img, .hero h2 img {
+                max-width: 90%;
+                height: auto;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .buttons button {
+                min-width: 200px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-logo-section, 
+            .quick-links, 
+            .contact-section, 
+            .sales-section {
+                width: 100%;
+                margin-bottom: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Smartphones */
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 2%;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            header.scrolled .logo img {
+                height: 30px;
+            }
+            
+            .orcamento {
+                padding: 5px 10px;
+                font-size: 10px;
+                border-radius: 20px;
+            }
+            
+            .hero {
+                height: 85vh;
+                padding-top: 90px;
+                padding: 90px 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 18px;
+                margin-bottom: 25px;
+            }
+            
+            .hero h1 img, .hero h2 img {
+                max-width: 95%;
+                height: auto;
+            }
+            
+            .buttons button {
+                min-width: 250px;
+                padding: 15px 25px;
+                font-size: 16px;
+                border-radius: 8px;
+            }
+            
+            main {
+                padding: 0 10px;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+                padding: 15px;
+            }
+        }
+
+        /* Smartphones Pequenos */
+        @media (max-width: 320px) {
+            .hero h1 {
+                font-size: 20px;
+            }
+            
+            .hero h2 {
+                font-size: 16px;
+            }
+            
+            .buttons button {
+                min-width: 220px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .orcamento {
+                padding: 4px 8px;
+                font-size: 9px;
+            }
+        }  
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <a href="/CRIFER/Home.html"</a>
+            <img src="/logo.superior.png" alt="Logo CRIFER"><img src="/frame2.png" alt="Logo CRIFER">
+            </a>
+        </div>
+        
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav>
+            <ul>
+       <li><a href="#Produtos">Produto</a></li>
+                <li><a href="/CRIFER/Historia.html">Sobre nós</a></li>
+                <li><a href="/CRIFER/Historia.html#historia">História</a></li>
+               
+            </ul>
+        </nav>
+        <a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento" class="orcamento">Fazer Orçamento</a>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <section class="hero">
+            <h1>
+                <img src="/Frame 1321316176.svg" alt="Logo CRIFER">
+                <img src="/frame2.png" alt="Logo CRIFER">
+            </h1>
+            <h2>
+                <img src="/FRAME.MEIO.png" alt="Logo CRIFER">
+            </h2>
+            <div class="buttons">
+                <button class="contact"><a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento">(16) 99645 - 0237</a></button>
+                <button class="products"><a href="#Produtos">NOSSOS PRODUTOS</a></button>
+                <button class="about"><a href="/CRIFER/Historia.html">SOBRE NÓS</a></button>
+            </div>
+        </section>
+        
+        <!-- Aqui você pode adicionar o carrossel de produtos ou outros elementos -->
+        <div id="productCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Itens do carrossel serão adicionados aqui -->
+            </div>
+        </div>
+    </main>
+<!-- Estilos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+           
+            color: white;
+            text-align: center;
+            background-image: url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+        
+       /* HEADER STYLES */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(128, 0, 0, 0.95);
+            padding: 15px 5%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 5%;
+            background-color: rgba(128, 0, 0, 1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            transition: height 0.3s ease;
+        }
+        
+        header.scrolled .logo img {
+            height: 40px;
+        }
+        
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin: 0 95px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 16px;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: #ffcccc;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffcccc;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .orcamento {
+            background-color: #a83232;
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .orcamento:hover {
+            background-color: #cc3939;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Banner section */
+.produto-banner {
+    position: relative;
+    height: 93vh;
+    width: 115%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    color: white;
+    text-align: center;
+    padding: 0 2rem;
+    font-size: 1.8rem;
+
+    /* nova borda */
+    border: 2px solid #ffffffe2;  /* troque #ff6600 pela cor desejada */
+    border-radius: 8px;         /* opcional: cantos arredondados */
+}
+
+
+/* vídeo visível e ocupando toda a área */
+.video-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* conteúdo por cima do vídeo */
+.conteudo-banner {
+    position: absolute;
+    z-index: 1;
+    padding: 1rem;
+    color: white;
+}
+
+/* opcional: camada escura por cima do vídeo para contraste */
+.produto-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); /* camada escura */
+    z-index: 0;
+}
+        
+        .banner-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        
+        /* Product grid section */
+        .produtos-grid {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .produtos-grid h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .produtos-grid h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #800000;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .produto-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        /* Product box style */
+        .produto-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            width: 100%;
+           
+            text-align: center;
+        }
+        
+        .produto-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .produto-imagem {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .produto-imagem img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .produto-box:hover .produto-imagem img {
+            transform: scale(1.1);
+        }
+        
+        .produto-box h3 {
+            padding: 15px;
+            font-size: 1.3rem;
+            color: white;
+        }
+        
+        /* Call to action section */
+        .solicitar-orcamento {
+            background-color: rgba(0, 0, 0, 0.914);
+            padding: 4rem 5%;
+            text-align: center;
+            margin: 2rem 0;
+            width: 108%;
+        }
+        
+        .orcamento-texto {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .orcamento-texto h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .orcamento-texto p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-orcamento {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25d366;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-orcamento:hover {
+            background-color: #1ea952;
+            transform: scale(1.05);
+        }
+        
+        .btn-orcamento i {
+            margin-right: 8px;
+        }  
+/* Estilos melhorados para o rodapé */
+footer {
+    background-color: #800000;
+    color: #fff;
+    padding: 20px 0 20px;
+    width: 100%;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    gap: 40px;
+}
+
+/* Estilo melhorado para o logo e descrição */
+.footer-logo {
+    flex: 1;
+    max-width: 250px;
+}
+
+.footer-logo img {
+    width: 210px;
+    height: 100px;
+    max-height: 100px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    margin-left: -20px;
+}
+
+.footer-logo p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #f1f1f1;
+    font-size: 0.95rem;
+}
+
+/* Ícones sociais melhorados */
+.social-container {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    margin-top: 15px;   
+}
+.social-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin-left: 35 -20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #800000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+}
+
+.social-icon:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    background-color: #f8f8f8;
+    
+}
+
+.social-icon svg {
+    width: 22px;
+    height: 22px;
+    
+}
+
+/* Colunas principais do rodapé */
+.footer-links, 
+.contact-info, 
+.central {
+    flex: 1;
+    padding: 0 15px;
+}
+
+/* Títulos das seções */
+.footer-links h3{
+padding-left: 122px;
+font-weight: bold;
+font-size: 1.2rem;
+margin-bottom: 30px;
+position: relative;
+}
+
+
+.contact-info h3, 
+.central h3 {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+     
+}
+
+.footer-links h3::after,
+.contact-info h3::after,
+.central h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 0px;
+    background-color: #000000;
+}
+
+/* Lista de links melhorada */
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+    padding-left: 140px;
+}
+
+/* Links uniformizados */
+.footer-links ul li a,
+.footer-links ul li a:link,
+.footer-links ul li a:visited,
+.footer-links ul li a:active,
+.contact-info a,
+.central a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    
+}
+
+.footer-links ul li a:hover,
+.contact-info a:hover,
+.central a:hover {
+    color: #f1f1f1 !important;
+    text-decoration: none !important;
+    padding-left: 5px;
+}
+
+/* Informações de contato */
+.contact-info p,
+.central p {
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Rodapé inferior */
+.footer-bottom {
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #f1f1f1;
+    font-size: 0.9rem;
+}
+
+ /* MEDIA QUERIES - RESPONSIVIDADE */
+
+        /* Tablet - Telas médias (768px - 1024px) */
+        @media screen and (max-width: 1024px) {
+            /* Header responsivo */
+            nav ul li {
+                margin: 0 40px;
+            }
+            
+            nav ul li a {
+                font-size: 14px;
+            }
+            
+            .orcamento {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            /* Banner */
+            .produto-banner {
+                height: 70vh;
+                font-size: 1.5rem;
+            }
+            
+            .conteudo-banner h1 {
+                font-size: 2.5rem;
+            }
+            
+            .conteudo-banner p {
+                font-size: 1.2rem;
+            }
+            
+            /* Grid de produtos */
+            .produto-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
+            
+            .produtos-grid h2 {
+                font-size: 2rem;
+            }
+            
+            /* Footer */
+            .footer-content {
+                gap: 30px;
+            }
+            
+            .footer-links h3 {
+                padding-left: 60px;
+            }
+            
+            .footer-links ul li {
+                padding-left: 80px;
+            }
+        }
+
+        /* Tablet pequeno (600px - 768px) */
+        @media screen and (max-width: 768px) {
+            /* Header mobile */
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(128, 0, 0, 0.98);
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+                padding: 10px 20px;
+            }
+            
+            /* Banner */
+            .produto-banner {
+                height: 60vh;
+                margin-top: 60px;
+                width: 100%;
+                border: none;
+                border-radius: 0;
+            }
+            
+            .conteudo-banner h1 {
+                font-size: 2rem;
+            }
+            
+            .conteudo-banner p {
+                font-size: 1rem;
+            }
+            
+            /* Produtos */
+            .produtos-grid {
+                padding: 3rem 3%;
+            }
+            
+            .produto-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .produto-imagem {
+                height: 200px;
+            }
+            
+            .produto-box h3 {
+                font-size: 1.1rem;
+                padding: 10px;
+            }
+            
+            /* Orçamento */
+            .solicitar-orcamento {
+                padding: 3rem 3%;
+                width: 100%;
+                margin: 1rem 0;
+            }
+            
+            .orcamento-texto h2 {
+                font-size: 1.5rem;
+            }
+            
+            .orcamento-texto p {
+                font-size: 1rem;
+            }
+            
+            .btn-orcamento {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            /* Footer responsivo */
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+            
+            .footer-logo {
+                max-width: 100%;
+            }
+            
+            .footer-logo img {
+                margin-left: 0;
+            }
+            
+            .social-container {
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .social-icon {
+                margin-left: 0;
+            }
+            
+            .footer-links h3 {
+                padding-left: 0;
+            }
+            
+            .footer-links ul li {
+                padding-left: 0;
+            }
+            
+            .footer-links h3::after,
+            .contact-info h3::after,
+            .central h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Mobile - Celulares (até 600px) */
+        @media screen and (max-width: 600px) {
+            /* Header */
+            header {
+                padding: 10px 3%;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            /* Banner */
+            .produto-banner {
+                height: 50vh;
+                padding: 0 1rem;
+            }
+            
+            .conteudo-banner h1 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            
+            .conteudo-banner p {
+                font-size: 0.9rem;
+            }
+            
+            /* Produtos */
+            .produtos-grid {
+                padding: 2rem 3%;
+            }
+            
+            .produtos-grid h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .produto-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            .produto-imagem {
+                height: 180px;
+            }
+            
+            .produto-box h3 {
+                font-size: 1rem;
+                padding: 8px;
+            }
+            
+            /* Orçamento */
+            .solicitar-orcamento {
+                padding: 2rem 3%;
+            }
+            
+            .orcamento-texto h2 {
+                font-size: 1.3rem;
+            }
+            
+            .orcamento-texto p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .btn-orcamento {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            /* Footer */
+            .container {
+                padding: 0 15px;
+            }
+            
+            .footer-content {
+                gap: 25px;
+            }
+            
+            .footer-logo img {
+                width: 180px;
+                height: 80px;
+            }
+            
+            .contact-info h3,
+            .central h3,
+            .footer-links h3 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+            
+            .contact-info p,
+            .central p,
+            .footer-links ul li a {
+                font-size: 0.9rem;
+            }
+            
+            .footer-bottom p {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+        }
+
+        /* Mobile pequeno (até 480px) */
+        @media screen and (max-width: 480px) {
+            /* Header */
+            header {
+                padding: 8px 2%;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            /* Banner */
+            .produto-banner {
+                height: 45vh;
+                margin-top: 50px;
+            }
+            
+            .conteudo-banner h1 {
+                font-size: 1.3rem;
+            }
+            
+            .conteudo-banner p {
+                font-size: 0.8rem;
+            }
+            
+            /* Produtos */
+            .produtos-grid {
+                padding: 1.5rem 2%;
+            }
+            
+            .produtos-grid h2 {
+                font-size: 1.3rem;
+            }
+            
+            .produto-container {
+                gap: 12px;
+            }
+            
+            .produto-imagem {
+                height: 150px;
+            }
+            
+            /* Orçamento */
+            .solicitar-orcamento {
+                padding: 1.5rem 2%;
+            }
+            
+            .orcamento-texto h2 {
+                font-size: 1.2rem;
+            }
+            
+            .btn-orcamento {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            
+            /* Footer */
+            .container {
+                padding: 0 10px;
+            }
+            
+            .footer-logo img {
+                width: 150px;
+                height: 70px;
+            }
+            
+            .social-icon {
+                width: 38px;
+                height: 38px;
+            }
+            
+            .social-icon svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+         /* Ajustes para background em dispositivos móveis */
+        @media screen and (max-width: 768px) {
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+
+
+
+
+
+
+
+        
+       
+    </style>
+</head>
+<body>
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- Banner do Produto -->
+       <section class="produto-banner">
+  <video class="video-banner" autoplay muted loop playsinline>
+    <source src="/video2.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeos HTML5.
+  </video>
+  <div class="conteudo-banner">
+     <h1>Soluções em Ferragem Armada</h1>
+      <p>Projetos inovadores, eficientes e personalizados para sua necessidade</p>
+  </div>
+</section>
+        <!-- Produtos em Destaque -->
+        <section class="produtos-grid">
+<DIV  ID="Produtos">        
+            <h2>Nossos Produtos</h2>  
+</DIV>  
+            <div class="produto-container">
+                <!-- Produto 1 -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto1.png" alt="Arames">
+                    </div>
+                    <h3>Arames</h3>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto2.png" alt="Tela de Radier">
+                    </div>
+                    <h3>Tela de Radier</h3>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto3.png" alt="Pregos">
+                    </div>
+                    <h3>Pregos</h3>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto4.png" alt="Espaçadores">
+                    </div>
+                    <h3>Espaçadores</h3>
+                </div>
+                
+                <!-- Produto 5 (Adicionado) -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto5.png" alt="Sapata">
+                    </div>
+                    <h3>Sapata</h3>
+                </div>
+                
+                <!-- Produto 6 (Adicionado) -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto6.png" alt="Treliças">
+                    </div>
+                    <h3>Treliças</h3>
+                </div>
+                
+                <!-- Produto 7 (Adicionado) -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto7.png" alt="Vergalhões">
+                    </div>
+                    <h3>Vergalhões</h3>
+                </div>
+                
+                <!-- Produto 8 (Adicionado) -->
+                <div class="produto-box">
+                    <div class="produto-imagem">
+                        <img src="/produto8.png" alt="Vigas">
+                    </div>
+                    <h3>Vigas</h3>
+                </div>
+            </div>
+        </section>
+        <!-- Solicitação de Orçamento -->
+        <section class="solicitar-orcamento">
+            <div class="orcamento-texto">
+                <h2>Precisa de um projeto personalizado?</h2>
+                <p>Nossa equipe está pronta para desenvolver a solução ideal para sua necessidade.</p>
+            </div>
+            <a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento" class="btn-orcamento" target="_blank">
+                <i class="fab fa-whatsapp"></i> Solicitar Orçamento
+            </a>
+        </section>
+    </main>
+<!-- Rodapé Melhorado -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <!-- Logo e Descrição -->
+            <div class="footer-logo">
+                <a href="/CRIFER/Home.html">
+                    <img src="/logo.inferior.png" alt="Logo CRIFER">
+               
+                
+                <!-- Ícones Sociais -->
+                <div class="social-container">
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento" 
+                       class="social-icon" 
+                       title="WhatsApp" 
+                       target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                            <path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- Email -->
+                    <a href="mailto:vendas.crifer@gmail.com" 
+                       class="social-icon" 
+                       title="Email" 
+                       target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Links Rápidos -->
+            <div class="footer-links">
+                <h3>Links Rápidos</h3>
+                <ul>
+                    <li><a href="/CRIFER/Home.html">Página Inicial</a></li>
+                    <li><a href="/CRIFER/Home.html#Produtos">Produtos</a></li>
+                    <li><a href="/CRIFER/Historia.html">Sobre Nós</a></li>
+                   
+                </ul>
+            </div>
+            
+            <!-- Informações de Contato -->
+            <div class="contact-info">
+                <h3>Contato</h3>
+                <p>
+                    <a href="https://wa.me/5516996450237" 
+                       target="_blank" 
+                       title="WhatsApp">
+                         (16) 9.9645-0237
+                    </a>
+                </p>
+                <p>
+                    <a href="https://wa.me/5516993678475" 
+                       target="_blank" 
+                       title="WhatsApp">
+                         (16) 9.9367-8475
+                    </a>
+                </p>
+                <p>
+                    <a href="mailto:vendas.crifer@gmail.com" 
+                       title="Enviar Email">
+                         vendas.crifer@gmail.com
+                    </a>
+                </p>
+            </div>
+            
+            <!-- Central de Vendas -->
+            <div class="central">
+                <h3>Central de Vendas</h3>
+                <p>
+                    <a href="https://maps.google.com/?q=Av.+Ettore+e+Aurora+Coraucci,+610,+Jardim+Alexandre+Balbo,+Ribeirão+Preto+-+SP" 
+                       target="_blank" 
+                       title="Ver no Google Maps">
+                         Av. Ettore e Aurora Coraucci, 610
+                    </a>
+                </p>
+                <p>
+                    <a href="https://maps.google.com/?q=Jardim+Alexandre+Balbo,+Ribeirão+Preto+-+SP" 
+                       target="_blank" 
+                       title="Ver no Google Maps">
+                        Jardim Alexandre Balbo
+                    </a>
+                </p>
+                <p>
+                    <a href="https://maps.google.com/?q=Ribeirão+Preto+-+SP" 
+                       target="_blank" 
+                       title="Ver no Google Maps">
+                        Ribeirão Preto - SP
+                    </a>
+                </p>
+                <p><strong>CEP:</strong> 14096-160</p>
+            </div>
+        </div>
+        
+        <!-- Rodapé Inferior -->
+        <div class="footer-bottom">
+            <p>
+                © 2024 CRIFER ARAMES E FERRAGEM ARMADAS<br>
+                <strong>CNPJ:</strong> 52.959.907/0001-86<br>
+                
+            </p>
+        </div>
+    </div>
+</footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Script para animações ao rolar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Inicializar AOS para animações ao rolar
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init();
+            
+            // Adicionar classe para animar textos
+            const textElements = document.querySelectorAll('.featurette-heading, .lead');
+            textElements.forEach(function(element) {
+                element.classList.add('animate-text');
+            });
+            
+            // Adicionar animação ao carousel
+            const carousel = document.getElementById('myCarousel');
+            carousel.addEventListener('slide.bs.carousel', function() {
+                const activeItem = this.querySelector('.carousel-item.active img');
+                activeItem.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    activeItem.style.transform = 'scale(1)';
+                }, 500);
+            });
+        });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript para funcionalidades interativas -->
+    <script>
+        // Script para efeito de rolagem no cabeçalho
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Script para menu responsivo
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('active');
+        });
+    </script>
+<script>
+  const video = document.querySelector('.video-banner');
+  video.playbackRate = 1.0; // velocidade: 1.0x (mais lento). Use 2.0 para 2x mais rápido.
+</script>
+
+<script src="/rodape.html"></script>
+
+
+
+<!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // Toggle do menu mobile
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            nav.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        // Scroll effect no header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Fechar menu ao clicar em um link (mobile)
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                const nav = document.getElementById('nav-menu');
+                const menuToggle = document.querySelector('.menu-toggle');
+                
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+        </script>
+
+
+  <!-- BOTÃO WHATSAPP - COPIE ESTE CÓDIGO -->
+    <a href="https://wa.me/5516996450237?text=Olá,%20gostaria%20de%20fazer%20um%20orçamento" 
+       target="_blank" 
+       style="position: fixed !important;
+              bottom: 20px !important;
+              right: 20px !important;
+              width: 60px !important;
+              height: 60px !important;
+              background-color: #25D366 !important;
+              border-radius: 50% !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              box-shadow: 0 4px 8px rgba(0,0,0,0.3) !important;
+              z-index: 999999 !important;
+              text-decoration: none !important;
+              transition: all 0.3s ease !important;"
+       onmouseover="this.style.backgroundColor='#20BA5A'; this.style.transform='scale(1.1)'"
+       onmouseout="this.style.backgroundColor='#25D366'; this.style.transform='scale(1)'">  
+        <!-- Ícone WhatsApp -->
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.386"/>
+        </svg>
+    </a>
+</body>
+</html>
+
+ 
+
+
+      
